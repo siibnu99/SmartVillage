@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>/favicon.ico">
     <link rel="icon" type="image/ico" href="<?= base_url() ?>/favicon.ico">
     <title>
-        Base App - Admin Web
+        Smart Village - Admin Web
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -64,7 +64,7 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main" data-color="info">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main" data-color="success">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0  text-center" href="<?= base_url('admincamakara/dashboard') ?>">

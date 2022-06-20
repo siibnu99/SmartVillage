@@ -1,11 +1,11 @@
 <?= $this->extend('templates/auth') ?>
 <?= $this->section('content') ?>
 <section>
-    <div class="page-header min-vh-75">
-        <div class="container-fluid">
+    <div class="page-header min-vh-100">
+        <div class="container-fluid ">
             <div class="row">
                 <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-                    <div class="card card-plain mt-8">
+                    <div class="card card-plain ">
                         <div class="card-header pb-0 text-left bg-transparent">
                             <h3 class="font-weight-bolder">Selamat Datang </h3>
                             <p class="mb-0">Silahkan login! Masukan email dan password kamu</p>
@@ -53,7 +53,7 @@
                         </div> -->
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" style="background-color: #FAFAFA ;">
                     <div class="h-100" style="background-image:url('<?= base_url() ?>/assets/img/illustrations/Branding.png');background-repeat: no-repeat;background-position: center;background-size: contain;"></div>
                     <!-- <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
                         <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('<?= base_url() ?>/assets/img/illustrations/Branding.png')"></div>

@@ -6,9 +6,9 @@
     <div class="col-12">
         <div class="d-flex justify-content-between px-2 py-1">
             <div>
-                <a role="button" href="<?= admin_url('user') ?>" class="btn btn-sm bg-gradient-info">Semua Role</a>
+                <a role="button" href="<?= admin_url('user') ?>" class="btn btn-sm bg-gradient-success">Semua Role</a>
                 <?php foreach (role_access() as $value) : ?>
-                    <a role="button" href="<?= admin_url('user/' . $value[0]) ?>" class="btn btn-sm bg-gradient-info"><?= $value[1] ?></a>
+                    <a role="button" href="<?= admin_url('user/' . $value[0]) ?>" class="btn btn-sm bg-gradient-success"><?= $value[1] ?></a>
                 <?php endforeach ?>
             </div>
             <div>
@@ -66,8 +66,8 @@
                 "url": "<?= admin_url('user/listdata/' . $id) ?>",
                 "type": "POST",
                 data: function(d) {
-                    let token = $('.txt_csrfname').val(); 
-                    d.csrf_test_name = token; 
+                    let token = $('.txt_csrfname').val();
+                    d.csrf_test_name = token;
                 },
                 'dataSrc': function(response) {
                     console.log(response);
