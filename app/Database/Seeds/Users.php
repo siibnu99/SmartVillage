@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Database\Seeds;
-use App\Libraries\Uuid;
-use CodeIgniter\Database\Seeder;
+namespace App\Controllers;
 
-class Users extends Seeder
+use CodeIgniter\RESTful\ResourceController;
+
+class ApiUser extends ResourceController
 {
+    protected $modelName = 'App\Models\UserModel';
+    protected $format    = 'json';
 
-    public function run()
+    public function show($id = null)
     {
-        $this->Uuid = new Uuid();
-        $data = [
-            'id_user' => $this->Uuid->v4(),
-            'fullname' => 'Mohammad Ibnu',
-            'email' => 'siibnu99@gmail.com',
-            'password' => password_hash('admin123', PASSWORD_DEFAULT),
-            'is_active' => 1,
-            'role_access'=>2,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
-
-        ];
-        // Using Query Builder
-        $this->db->table('users')->replace($data);
+        $user = $this->UserModel->where('id_user', $id)->first();
+        if ($user) {
+            return json_encode([
+                'status' => 200,
+                'data' => $user,
+            ]);
+        } else {
+            return json_encode([
+                'status' => 400,
+                'message' => 'User tidak ditemukan!',
+            ]);
+        }
     }
 }

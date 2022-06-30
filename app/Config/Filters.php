@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\Auth;
+use App\Filters\Jwt;
 use App\Filters\Noauth;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
@@ -23,6 +24,7 @@ class Filters extends BaseConfig
         'honeypot' => Honeypot::class,
         'auth' => Auth::class,
         'noauth' => Noauth::class,
+        'jwt' => Jwt::class,
     ];
 
     /**
@@ -39,7 +41,7 @@ class Filters extends BaseConfig
             // 'auth'
         ],
         'after' => [
-            'toolbar',
+            // 'toolbar',
             // 'honeypot',
         ],
     ];

@@ -32,6 +32,16 @@ class Users extends Migration
                 'constraint' => '126',
                 'null'    => true
             ],
+            'phone'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '126',
+                'null'    => true
+            ],
+            'picture'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '126',
+                'null'    => true
+            ],
             'is_active'       => [
                 'type'       => 'BOOLEAN',
                 'default'        => false,

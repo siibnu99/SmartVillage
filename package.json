@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2",
+    "react-native-radio-buttons-group": "^2.2.11"
+  }
+}

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Tokenjwt;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -28,11 +29,11 @@ class BaseController extends Controller
     //  */
     // protected $request;
     /**
-	 * Instance of the main Request object.
-	 *
-	 * @var HTTP\IncomingRequest
-	 */
-	protected $request;
+     * Instance of the main Request object.
+     *
+     * @var HTTP\IncomingRequest
+     */
+    protected $request;
 
     /**
      * An array of helpers to be loaded automatically upon
@@ -56,6 +57,7 @@ class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();
         $this->Uuid = new \App\Libraries\Uuid;
+        $this->TokenJwt = new Tokenjwt;
         $this->UserModel = new \App\Models\UserModel($request);
     }
 }
