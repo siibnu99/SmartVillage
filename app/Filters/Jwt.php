@@ -14,7 +14,7 @@ class Jwt implements FilterInterface
         $tokenjwt = new Tokenjwt;
         $data = $tokenjwt->checkToken($request->getServer('HTTP_AUTHORIZATION'));
         if ($data['status'] == 200) {
-            $request->auth = $data['data']->data;
+            $request->auth = $data['data'];
         } else {
             if (!$arguments) {
                 echo json_encode($data);

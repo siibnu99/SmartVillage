@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Users extends Migration
+class UserDetails extends Migration
 {
     public function up()
     {
@@ -13,33 +13,55 @@ class Users extends Migration
                 'type'           => 'VARCHAR',
                 'constraint'     => '126',
             ],
-            'number_user'          => [
-                'type'           => 'INT',
-                'constraint'     => '10',
-                'auto_increment' => true,
-            ],
-            'email'       => [
+            'nama_lengkap'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '126',
                 'null'    => true
             ],
-            'password'       => [
+            'tempat_lahir'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '126',
                 'null'    => true
             ],
-            'phone'       => [
+            'tanggal_lahir'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '126',
                 'null'    => true
             ],
-            'is_active'       => [
-                'type'       => 'BOOLEAN',
-                'default'        => false,
+            'jenis_kelamin'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '126',
+                'null'    => true
             ],
-            'role_access'       => [
+            'pekerjaan'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '126',
+                'null'    => true
+            ],
+            'nomor_ktp'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '126',
+                'null'    => true
+            ],
+            'id_dusun'       => [
                 'type'       => 'INT',
                 'constraint' => '2',
+                'null'    => true
+            ],
+            'rt'       => [
+                'type'       => 'INT',
+                'constraint' => '2',
+                'null'    => true
+            ],
+            'rw'       => [
+                'type'       => 'INT',
+                'constraint' => '2',
+                'null'    => true
+            ],
+            'picture'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '126',
+                'null'    => true
             ],
             'created_at'       => [
                 'type'       => 'TIMESTAMP',
@@ -55,15 +77,12 @@ class Users extends Migration
             ],
         ]);
         $this->forge->addKey('id_user', true);
-        $this->forge->addKey('number_user', false);
-        $this->forge->addKey('email');
-        $this->forge->addKey('token_active');
-        $this->forge->addKey('token_forgot');
-        $this->forge->createTable('users');
+        $this->forge->addForeignKey('id_user', 'users', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('user_details');
     }
 
     public function down()
     {
-        $this->forge->dropTable('users');
+        //
     }
 }

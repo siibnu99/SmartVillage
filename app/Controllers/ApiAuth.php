@@ -126,4 +126,53 @@ class ApiAuth extends BaseController
             ]);
         }
     }
+    public function registerUser()
+    {
+        if (!$this->validate([
+            'fullname' => [
+                'label'  => 'Nama lengkap',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi!',
+                ]
+            ],
+            'email' => [
+                'label'  => 'Email',
+                'rules'  => 'required|is_unique[users.email]|valid_email',
+                'errors' => [
+                    'required' => '{field} harus diisi!',
+                    'is_unique' => '{field} telah terdaftar',
+                    'valid_email' => '{field} tidak valid'
+                ]
+            ],
+            'password' => [
+                'label'  => 'Password',
+                'rules'  => 'required|min_length[8]',
+                'errors' => [
+                    'required' => '{field} harus diisi!',
+                    'min_length' => '{field} minimal 8 karakter!'
+                ]
+            ],
+            'rePassword' => [
+                'label'  => 'Re-Password',
+                'rules'  => 'required|matches[password]',
+                'errors' => [
+                    'required' => '{field} harus diisi!',
+                    'matches' => '{field} harus sama dengan password'
+                ]
+            ],
+        ])) return json_encode([
+            'status' => 400,
+            'message' => $this->validator->getErrors(),
+        ]);
+        $data = [
+            'id_user' => $this->Uuid->v4(),
+            'fullname' => $this->request->getVar('fullname'),
+            'email' => $this->request->getVar('email'),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+            'role_access' => 2,
+            'is_active' => 1,
+        ];
+        $user = $this->UserModel->insert($data);
+    }
 }

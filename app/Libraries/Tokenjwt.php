@@ -2,6 +2,7 @@
 
 namespace App\Libraries;
 
+use Firebase\JWT\BeforeValidException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
@@ -10,23 +11,7 @@ class Tokenjwt
     public $auth;
     public function privateKey()
     {
-        $privateKey = <<<EOD
-            -----BEGIN RSA PRIVATE KEY-----
-            MIICXAIBAAKBgQC8kGa1pSjbSYZVebtTRBLxBz5H4i2p/llLCrEeQhta5kaQu/Rn
-            vuER4W8oDH3+3iuIYW4VQAzyqFpwuzjkDI+17t5t0tyazyZ8JXw+KgXTxldMPEL9
-            5+qVhgXvwtihXC1c5oGbRlEDvDF6Sa53rcFVsYJ4ehde/zUxo6UvS7UrBQIDAQAB
-            AoGAb/MXV46XxCFRxNuB8LyAtmLDgi/xRnTAlMHjSACddwkyKem8//8eZtw9fzxz
-            bWZ/1/doQOuHBGYZU8aDzzj59FZ78dyzNFoF91hbvZKkg+6wGyd/LrGVEB+Xre0J
-            Nil0GReM2AHDNZUYRv+HYJPIOrB0CRczLQsgFJ8K6aAD6F0CQQDzbpjYdx10qgK1
-            cP59UHiHjPZYC0loEsk7s+hUmT3QHerAQJMZWC11Qrn2N+ybwwNblDKv+s5qgMQ5
-            5tNoQ9IfAkEAxkyffU6ythpg/H0Ixe1I2rd0GbF05biIzO/i77Det3n4YsJVlDck
-            ZkcvY3SK2iRIL4c9yY6hlIhs+K9wXTtGWwJBAO9Dskl48mO7woPR9uD22jDpNSwe
-            k90OMepTjzSvlhjbfuPN1IdhqvSJTDychRwn1kIJ7LQZgQ8fVz9OCFZ/6qMCQGOb
-            qaGwHmUK6xzpUbbacnYrIM6nLSkXgOAwv7XXCojvY614ILTK3iXiLBOxPu5Eu13k
-            eUz9sHyD6vkgZzjtxXECQAkp4Xerf5TGfQXGXhxIX52yH+N2LtujCdkQZjXAsGdm
-            B2zNzvrlgRmgBrklMTrMYgm1NPcW+bRLGcwgW2PTvNM=
-            -----END RSA PRIVATE KEY-----
-            EOD;
+        $privateKey = "-----BEGIN CERTIFICATE-----\nMIIDHDCCAgSgAwIBAgIIWUn7zRiEbFgwDQYJKoZIhvcNAQEFBQAwMTEvMC0GA1UE\nAwwmc2VjdXJldG9rZW4uc3lzdGVtLmdzZXJ2aWNlYWNjb3VudC5jb20wHhcNMjIw\nNzA2MDkzODQ5WhcNMjIwNzIyMjE1MzQ5WjAxMS8wLQYDVQQDDCZzZWN1cmV0b2tl\nbi5zeXN0ZW0uZ3NlcnZpY2VhY2NvdW50LmNvbTCCASIwDQYJKoZIhvcNAQEBBQAD\nggEPADCCAQoCggEBALbHGtdJt0LSrNHPfemoi3IXZwiIT4/2vVpLG/B8PZGEkWYM\n7WfXsCLqUaCY1itiGSKUfxVXI2wIHt0WkCyWJ7+6eYJ4pFw8w30xJ+K3m+BGp2em\nZxWq0txxDG2xg2MIUwfku+pmrqm8gs237nJY3zuRAPCdBnBTXz9C3EwATofs5fO6\nmw6EeNBU4aEBFW1kBDweNBu9rAqGxnqulmT7FvVW59TdgocODmdNdrAvUU4ihPXK\nS3c4G5NbbYtZDfuKIuvesgatMweFCx0EJoY8pNfYWU4ZwIOjyZJMpPSEcVBNPp+v\n88EnM77C7gsZmf229S+maqc7jxakcOynPzvXoLkCAwEAAaM4MDYwDAYDVR0TAQH/\nBAIwADAOBgNVHQ8BAf8EBAMCB4AwFgYDVR0lAQH/BAwwCgYIKwYBBQUHAwIwDQYJ\nKoZIhvcNAQEFBQADggEBAF3YDXk5684IpPhSdwS5Qznn1vJEfrG3ci+6ocwwiW5n\n1I3rbbPkwtrZ9ztGa+Dz+TmIRWi9pQQRsYZN6SUoq+8LrYFmVjf7OJZP8FxDeI/N\n3HlYx8MJfwf7iZKuLmpAE9jrjOq+aPveRmvqEEd8NbTogrGsHssqgIsy43d510wJ\n8kOsdgm0mms2eGVe4JIX0SOi0/xhARRTD6FYSlKniM4657RAuW7pkQzZu8A/Gf7q\nf7kS+YUMx1M0fmH+G+UURgLK7wBwLZzYfNGuI6bnDIPCVZgzQDIaaFlnHOqQx1Bb\nm2jjdFzvKJyZo79vNGgyhKdJZyY+koywbxIvY6rG8f8=\n-----END CERTIFICATE-----\n";
         return $privateKey;
     }
     public function getToken($data)
@@ -50,7 +35,6 @@ class Tokenjwt
     }
     public function checkToken($authHeader)
     {
-
         if ($authHeader == null) {
             $output = [
                 'message' => 'Access denied',
@@ -64,15 +48,21 @@ class Tokenjwt
         $token = null;
 
         $arr = explode(" ", $authHeader);
-
         $token = $arr[1];
-
+        $tokenParts = explode(".", $token);
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $tokenHeaderJson = json_decode($tokenHeader);
+        if (!preg_match('/^[a-z0-9]+$/i', $tokenHeaderJson->kid)) {
+            $output = [
+                'message' => 'Invalid Request',
+                'status' => 200,
+            ];
+            return $output;
+        }
         if ($token) {
 
             try {
-
-                $decoded = JWT::decode($token, new Key($secret_key, 'HS256'));
-
+                $decoded = JWT::decode($token, new Key($secret_key, 'RS256'));
                 // Access is granted. Add code of the operation here 
                 if ($decoded) {
                     // response true
@@ -83,6 +73,14 @@ class Tokenjwt
                     ];
                     return $output;
                 }
+            } catch (BeforeValidException $e) {
+                $output = [
+                    'message' => 'Access denied',
+                    "error" => $e->getMessage(),
+                    'status' => 401
+                ];
+                return $output;
+                $decoded = json_decode(base64_decode($tokenParts[1]));
             } catch (\Exception $e) {
 
                 $output = [

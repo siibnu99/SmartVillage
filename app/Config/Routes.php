@@ -40,7 +40,9 @@ $routes->group("api", function ($routes) {
         $routes->post('register', 'ApiAuth::register');
         $routes->get('user', 'ApiAuth::user', ['filter' => 'jwt']);
     });
-    $routes->resource('user', ['controller' => 'ApiUser']);
+    $routes->group("user", function ($routes) {
+        $routes->get('/', 'ApiUser::getOnce', ['filter' => 'jwt']);
+    });
 });
 $routes->group($request->adminUrl, function ($routes) {
     $routes->group('auth', function ($routes) {

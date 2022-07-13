@@ -5,14 +5,14 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 
-class ApiUser extends BaseController
+class ApiUserDetail extends BaseController
 {
     use ResponseTrait;
     public function getOnce()
     {
         $id = $this->request->auth->user_id;
         $phone = $this->request->auth->phone_number;
-        $dataUser = $this->UserModel->where('id_user', $id)->where("phone", $phone)->first();
+        $dataUser = $this->UserDetail->where('id_user', $id)->first();
         if ($dataUser) {
             return $this->respond($dataUser, 200);
         } else {

@@ -59,5 +59,6 @@ class BaseController extends Controller
         $this->Uuid = new \App\Libraries\Uuid;
         $this->TokenJwt = new Tokenjwt;
         $this->UserModel = new \App\Models\UserModel($request);
+        $this->UserDetailModel = new \App\Models\UserDetailModel();
     }
 }
