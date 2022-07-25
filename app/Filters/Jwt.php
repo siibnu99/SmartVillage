@@ -12,7 +12,7 @@ class Jwt implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $tokenjwt = new Tokenjwt;
-        $data = $tokenjwt->checkToken($request->getServer('HTTP_AUTHORIZATION'));
+        $data = $tokenjwt->checkTokenWithoutVerif($request->getServer('HTTP_AUTHORIZATION'));
         if ($data['status'] == 200) {
             $request->auth = $data['data'];
         } else {

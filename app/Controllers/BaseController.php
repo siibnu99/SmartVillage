@@ -42,7 +42,7 @@ class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['url', 'form'];
+    protected $helpers = ['url', 'form', 'surat'];
 
     /**
      * Constructor.
@@ -60,5 +60,6 @@ class BaseController extends Controller
         $this->TokenJwt = new Tokenjwt;
         $this->UserModel = new \App\Models\UserModel($request);
         $this->UserDetailModel = new \App\Models\UserDetailModel();
+        $this->SuratModel = new \App\Models\SuratModel($request);
     }
 }

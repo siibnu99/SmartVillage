@@ -84,5 +84,6 @@ class UserDetails extends Migration
     public function down()
     {
         //
+        $this->forge->dropTable('user_details');
     }
 }

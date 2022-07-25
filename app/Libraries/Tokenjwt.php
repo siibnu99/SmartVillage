@@ -60,9 +60,8 @@ class Tokenjwt
             return $output;
         }
         if ($token) {
-
             try {
-                $decoded = JWT::decode($token, new Key($secret_key, 'RS256'));
+                $decoded = JWT::decode($token,  $verify = false);
                 // Access is granted. Add code of the operation here 
                 if ($decoded) {
                     // response true
@@ -80,9 +79,65 @@ class Tokenjwt
                     'status' => 401
                 ];
                 return $output;
-                $decoded = json_decode(base64_decode($tokenParts[1]));
             } catch (\Exception $e) {
+                $output = [
+                    'message' => 'Access denied',
+                    "error" => $e->getMessage(),
+                    'status' => 401
+                ];
+                return $output;
+            }
+        }
+    }
+    public function checkTokenWithoutVerif($authHeader)
+    {
+        if ($authHeader == null) {
+            $output = [
+                'message' => 'Access denied',
+                'status' => 401
+            ];
+            return $output;
+        }
 
+        $secret_key = $this->privateKey();
+
+        $token = null;
+
+        $arr = explode(" ", $authHeader);
+        $token = $arr[1];
+        $tokenParts = explode(".", $token);
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $tokenHeaderJson = json_decode($tokenHeader);
+        if (!preg_match('/^[a-z0-9]+$/i', $tokenHeaderJson->kid)) {
+            $output = [
+                'message' => 'Invalid Request',
+                'status' => 200,
+            ];
+            return $output;
+        }
+
+        if ($token) {
+            try {
+                list($header, $payload, $signature) = explode(".", $authHeader);
+                $decoded = base64_decode($payload);
+                // Access is granted. Add code of the operation here 
+                if ($decoded) {
+                    // response true
+                    $output = [
+                        'message' => 'Access granted',
+                        'data' => json_decode($decoded),
+                        'status' => 200,
+                    ];
+                    return $output;
+                }
+            } catch (BeforeValidException $e) {
+                $output = [
+                    'message' => 'Access denied',
+                    "error" => $e->getMessage(),
+                    'status' => 401
+                ];
+                return $output;
+            } catch (\Exception $e) {
                 $output = [
                     'message' => 'Access denied',
                     "error" => $e->getMessage(),

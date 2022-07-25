@@ -40,7 +40,9 @@ class ApiUser extends BaseController
                 }
             }
         }
-        dd($this->model->find($id));
-        return $this->respond("asd");
+        return $this->respond([
+            'status' => 400,
+            'message' => 'Request invalid',
+        ], 400);
     }
 }

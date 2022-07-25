@@ -43,6 +43,19 @@ $routes->group("api", function ($routes) {
     $routes->group("user", function ($routes) {
         $routes->get('/', 'ApiUser::getOnce', ['filter' => 'jwt']);
     });
+    $routes->group("userdetail", function ($routes) {
+        $routes->get('/', 'ApiUserDetail::getOnce', ['filter' => 'jwt']);
+        $routes->post('/', 'ApiUserDetail::update', ['filter' => 'jwt']);
+        $routes->post('picture', 'ApiUserDetail::updateWithImage', ['filter' => 'jwt']);
+    });
+    $routes->group("surat", function ($routes) {
+        $routes->post('ktp', 'ApiSurat::uploadKTP', ['filter' => 'jwt']);
+        $routes->post('all', 'ApiSurat::all', ['filter' => 'jwt']);
+        $routes->post('allpicture', 'ApiSurat::allpicture', ['filter' => 'jwt']);
+        $routes->post('getall', 'ApiSurat::getAll', ['filter' => 'jwt']);
+        $routes->get('getnotifcount', 'ApiSurat::getnotifcount', ['filter' => 'jwt']);
+        $routes->post('setnotif', 'ApiSurat::setnotif', ['filter' => 'jwt']);
+    });
 });
 $routes->group($request->adminUrl, function ($routes) {
     $routes->group('auth', function ($routes) {
@@ -68,6 +81,14 @@ $routes->group($request->adminUrl, function ($routes) {
         $routes->post('active', 'User::toggleActiveAttempt');
         $routes->post('listdata', 'User::listdata');
         $routes->post('listdata/(:segment)', 'User::listdata/$1');
+    });
+    $routes->group('surat', ['filter' => 'auth'], function ($routes) {
+        $routes->get('', 'Surat::index');
+        $routes->get('(:num)', 'Surat::index/$1');
+        $routes->get('detail/(:segment)', 'Surat::detail/$1');
+        $routes->get('change', 'Surat::change');
+        $routes->post('listdata', 'Surat::listdata');
+        $routes->post('listdata/(:segment)', 'Surat::listdata/$1');
     });
     $routes->group('log', ['filter' => 'auth'], function ($routes) {
         $routes->get('/', 'Log::index');

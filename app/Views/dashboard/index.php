@@ -3,92 +3,104 @@
 <?= $this->section('content') ?>
 <div class="row">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Total surat</p>
-                            <h5 class="font-weight-bolder mb-0">
-                                512
-                                <!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
-                            </h5>
+        <div class="col-xl-12  mb-xl-4 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total surat</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    <?= $count_surat ?>
+                                    <!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
+                                </h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
-                            <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-xl-12  mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Surat diterima</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    <?= $count_surat_type_0 ?>
+                                    <!-- <span class="text-success text-sm font-weight-bolder">+3%</span> -->
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-success shadow text-center border-radius-md">
+                                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 bg-gradient-success rounded-3 d-flex flex-column align-items-center justify-content-center text-center text-white ">
+        <h2 class="text-white">Detail Surat</h2>
+        <p>Akumulasi surat yang sudah masuk dan rinciannya dapat dilihat disini</p>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Surat diterima</p>
-                            <h5 class="font-weight-bolder mb-0">
-                                502
-                                <!-- <span class="text-success text-sm font-weight-bolder">+3%</span> -->
-                            </h5>
+        <div class="col-xl-12  mb-xl-4 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Surat Diproses</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    <?= $count_surat_type_2 ?>
+                                    <!-- <span class="text-danger text-sm font-weight-bolder">-2%</span> -->
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-success shadow text-center border-radius-md">
-                            <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12  mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Surat Ditolak</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    <?= $count_surat_type_1 ?>
+                                    <!-- <span class="text-success text-sm font-weight-bolder">+5%</span> -->
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-danger shadow text-center border-radius-md">
+                                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Surat Diproses</p>
-                            <h5 class="font-weight-bolder mb-0">
-                                8
-                                <!-- <span class="text-danger text-sm font-weight-bolder">-2%</span> -->
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                            <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-sm-6">
-        <div class="card">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Surat Ditolak</p>
-                            <h5 class="font-weight-bolder mb-0">
-                                2
-                                <!-- <span class="text-success text-sm font-weight-bolder">+5%</span> -->
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-danger shadow text-center border-radius-md">
-                            <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 bg-gradient-info rounded-3 d-flex flex-column align-items-center justify-content-center text-white ">
+        <h3 class="text-white">Pengguna</h3>
+        <h1 class="text-white "><?= $count_user ?></>
     </div>
 </div>
 <!-- <div class="row mt-4">
